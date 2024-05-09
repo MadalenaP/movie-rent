@@ -70,30 +70,12 @@ export class LoginComponent implements OnInit, OnDestroy {
       }),
       filter((respose) => respose.access),
       tap(response => {
-        this.setSession(response);
-        this.updateState(response);
+        this.userService.setUpSession(response);
+        this.userService.updateState(response.access);
         this.router.navigate(['movies']);
       }),
       takeUntil(this.destroy$)
     ).subscribe();
-  }
-
-  private setSession(authResult: ILoginResponse): void {
-    const expiresAt = DateTime.now().plus({milliseconds: jwt.jwtDecode(authResult.access)['exp']});
-    // const expiresAt = DateTime.now().plus({milliseconds: 60000});
-    localStorage.setItem('id_token', authResult.access);
-    localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
-    localStorage.setItem('refresh_token', authResult.refresh);
-  }
-
-  private updateState(authResult: ILoginResponse): void {
-    const payload: UserStateModel = {
-      username: this.loginForm.get('username').value,
-      isAuthenticated: true,
-      userId: jwt.jwtDecode(authResult.access)['user_id'],
-      isAdmin: jwt.jwtDecode(authResult.access)['is_admin']
-    };
-    this.store.dispatch(new SetUserData(payload));
   }
 
 }

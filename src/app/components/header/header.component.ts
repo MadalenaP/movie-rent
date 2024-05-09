@@ -1,19 +1,25 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { UserState } from '../../state-management/user/user.state';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [AsyncPipe],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-constructor(
-  private userService: UserService
-) {}
+  @Select(UserState.isAuthenticated) isAuthenticated$: Observable<boolean>;
 
-public logout(): void {
-  this.userService.logout();
-}
+  constructor(
+    private userService: UserService
+  ) { }
+
+  public logout(): void {
+    this.userService.logout();
+  }
 }

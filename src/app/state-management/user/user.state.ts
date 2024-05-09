@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Action, State, StateContext } from "@ngxs/store";
-import { SetUserData } from "./user.actions";
+import { Action, Selector, State, StateContext } from "@ngxs/store";
+import { SetIsAdmin, SetIsAuthenticated, SetUserData, SetUserId } from "./user.actions";
 
 
 export class UserStateModel {
@@ -21,6 +21,11 @@ export class UserStateModel {
 @Injectable()
 export class UserState  {
 
+  @Selector()
+  static isAuthenticated(state: UserStateModel): boolean {
+    return state.isAuthenticated;
+  }
+  
   @Action(SetUserData)
   SetUserData(ctx: StateContext<UserStateModel>, payload: {userData: UserStateModel}): void {
         ctx.patchState({
@@ -30,5 +35,25 @@ export class UserState  {
           isAdmin: payload.userData.isAdmin
         })
   }
-  
+
+  @Action(SetIsAuthenticated)
+  SetIsAuthenticated(ctx: StateContext<UserStateModel>, payload: {isAuthenticated: boolean}): void {
+    ctx.patchState({
+      isAuthenticated: payload.isAuthenticated
+    });
+  }
+
+  @Action(SetUserId)
+  SetUserId(ctx: StateContext<UserStateModel>, payload: {userId: string}): void {
+    ctx.patchState({
+      userId: payload.userId
+    });
+  }
+
+  @Action(SetIsAdmin)
+  SetIsAdmin(ctx: StateContext<UserStateModel>, payload: {isAdmin: boolean}): void {
+    ctx.patchState({
+      isAdmin: payload.isAdmin
+    });
+  }
 }
