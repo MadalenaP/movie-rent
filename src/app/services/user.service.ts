@@ -12,15 +12,8 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getHttpOptions(options?: any, returnAsArrayBuffer?: boolean) {
-    const httpOptions = { ...options }; // ,observe: 'response'
-    const headers = {};
-    httpOptions.headers = { ...headers, ...(options ? options.headers : {}) };
-    httpOptions.responseType = "text";
-    httpOptions.observe = "body";
-    return httpOptions;
-  }
   public login(loginData: ILoginData): Observable<ILoginResponse> {
+    console.log('loginData', loginData)
     return this.http.post<ILoginResponse>('/api/auth/login/', loginData);
   }
 }

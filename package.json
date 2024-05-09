@@ -23,7 +23,12 @@
     "@angular/platform-server": "^17.2.0",
     "@angular/router": "^17.2.0",
     "@angular/ssr": "^17.2.1",
+    "@ngxs/devtools-plugin": "^3.8.2",
+    "@ngxs/logger-plugin": "^3.8.2",
+    "@ngxs/store": "^3.8.2",
     "express": "^4.18.2",
+    "jwt-decode": "^4.0.0",
+    "ngxs-reset-plugin": "^3.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

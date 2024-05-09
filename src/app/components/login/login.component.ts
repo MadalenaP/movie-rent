@@ -3,7 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveF
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { UserService } from '../../services/user.service';
-
+import { Store } from '@ngxs/store';
+import { Login } from '../../state-management/user/user.actions';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private user: UserService,
+    private store: Store, 
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -33,10 +35,9 @@ export class LoginComponent implements OnInit {
     if(!this.loginForm.valid) {
       return;
     } else {
-      this.user.login(this.loginForm.value).subscribe(test => {
-        console.log('res', test)
-      })
-    }
+      console.log(this.loginForm.value)
+      this.store.dispatch(new Login(this.loginForm.value));
+    } 
   }
 
 }
