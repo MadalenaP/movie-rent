@@ -1,10 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { UserService } from '../../services/user.service';
 import { Store } from '@ngxs/store';
-import { Login } from '../../state-management/user/user.actions';
+import { Subject, catchError, filter, of, takeUntil, tap } from 'rxjs';
+import * as jwt from 'jwt-decode';
+import moment from 'moment';
+import { ILoginResponse } from '../../interfaces/ILoginResponse';
+import { UserStateModel } from '../../state-management/user/user.state';
+import { SetUserData } from '../../state-management/user/user.actions';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -12,16 +18,32 @@ import { Login } from '../../state-management/user/user.actions';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+  private destroy$: Subject<boolean> = new Subject<boolean>();
   protected loginForm: FormGroup;
+  protected showErrorMessage: boolean = false;
 
   constructor(
-    private user: UserService,
+    private userService: UserService,
     private store: Store, 
+    private router: Router,
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.setUpFormGroup();
+    this.formValueChangeListener();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
+
+  private formValueChangeListener(): void {
+    this.loginForm.valueChanges.pipe(
+      tap(() => this.showErrorMessage = false),
+      takeUntil(this.destroy$)
+    ).subscribe();
   }
 
   private setUpFormGroup(): void {
@@ -35,9 +57,42 @@ export class LoginComponent implements OnInit {
     if(!this.loginForm.valid) {
       return;
     } else {
-      console.log(this.loginForm.value)
-      this.store.dispatch(new Login(this.loginForm.value));
+      this.login();
     } 
+  }
+
+
+  private login(): void {
+    this.userService.login(this.loginForm.value).pipe(
+      catchError((err) => {
+        this.showErrorMessage = true;
+        return of(err);
+      }),
+      filter((respose) => respose.access),
+      tap(response => {
+        this.setSession(response);
+        this.updateState(response);
+        this.router.navigate(['movies']);
+      }),
+      takeUntil(this.destroy$)
+    ).subscribe();
+  }
+
+  private setSession(authResult: ILoginResponse): void {
+    const expiresAt = moment().add(jwt.jwtDecode(authResult.access)['exp'],'second');
+    localStorage.setItem('id_token', authResult.access);
+    localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+    localStorage.setItem('refresh_token', authResult.refresh);
+  }
+
+  private updateState(authResult: ILoginResponse): void {
+    const payload: UserStateModel = {
+      username: this.loginForm.get('username').value,
+      isAuthenticated: true,
+      userId: jwt.jwtDecode(authResult.access)['user_id'],
+      isAdmin: jwt.jwtDecode(authResult.access)['is_admin']
+    };
+    this.store.dispatch(new SetUserData(payload));
   }
 
 }

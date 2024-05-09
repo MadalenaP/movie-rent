@@ -1,18 +1,11 @@
 import { Injectable } from "@angular/core";
-import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { Login } from "./user.actions";
-import { ILoginData } from "../../interfaces/ILoginData";
-import { UserService } from "../../services/user.service";
-import { catchError, tap } from "rxjs/operators";
-import * as jwt from 'jwt-decode';
-import { Observable, of } from "rxjs";
-import { ILoginResponse } from "../../interfaces/ILoginResponse";
+import { Action, State, StateContext } from "@ngxs/store";
+import { SetUserData } from "./user.actions";
 
 
 export class UserStateModel {
   username: string;
   isAuthenticated: boolean;
-  accessToken: string;
   userId: string;
   isAdmin: boolean;
 }
@@ -21,7 +14,6 @@ export class UserStateModel {
   defaults: {
     username: null,
     isAuthenticated: false,
-    accessToken: null,
     userId: null,
     isAdmin: false
   }
@@ -29,24 +21,14 @@ export class UserStateModel {
 @Injectable()
 export class UserState  {
 
-  constructor(
-    private userService: UserService
-  ) {}
-
-  @Action(Login)
-  Login(ctx: StateContext<UserStateModel>, payload: {loginData: ILoginData}): Observable<ILoginResponse> {
-   return this.userService.login(payload.loginData).pipe(
-      tap((response) => {
-        console.log('response', response)
+  @Action(SetUserData)
+  SetUserData(ctx: StateContext<UserStateModel>, payload: {userData: UserStateModel}): void {
         ctx.patchState({
-          username: payload.loginData.username,
-          isAuthenticated: true,
-          accessToken: response.access,
-          userId: jwt.jwtDecode(response.access)['user_id'],
-          isAdmin: jwt.jwtDecode(response.access)['is_admin']
+          username: payload.userData.username,
+          isAuthenticated: payload.userData.isAuthenticated,
+          userId: payload.userData.userId,
+          isAdmin: payload.userData.isAdmin
         })
-      })
-    );
   }
   
 }

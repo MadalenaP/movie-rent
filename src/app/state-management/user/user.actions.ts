@@ -1,6 +1,6 @@
-import { ILoginData } from "../../interfaces/ILoginData";
+import { UserStateModel } from "./user.state";
 
-export class Login {
-  static readonly type = '[User] Login';
-  constructor(public loginData: ILoginData) {}
+export class SetUserData {
+  static readonly type = '[User] Set user data';
+  constructor(public userData: UserStateModel) {}
 }

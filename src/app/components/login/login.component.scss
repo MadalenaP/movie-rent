@@ -1,0 +1,14 @@
+section {
+  width: fit-content;
+  margin: auto;
+}
+form {
+  width: fit-content;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+
+  >* {
+    margin: auto;
+  }
+}
