@@ -66,15 +66,16 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "buildTarget": "movie-rent:build",
+            "proxyConfig": "src/proxy.conf.json"
+          },
+        
           "configurations": {
             "production": {
               "buildTarget": "movie-rent:build:production"
-            },
-            "development": {
-              "buildTarget": "movie-rent:build:development"
             }
-          },
-          "defaultConfiguration": "development"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
