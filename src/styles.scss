@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 body {
+  --mat-menu-container-color: #102540;
   background-color: #0A0F26;
   color: #fff;
   margin: 0; 
@@ -67,4 +68,17 @@ button {
   --mdc-filled-text-field-focus-active-indicator-color: #ffffff;
   --mdc-filled-text-field-caret-color: #ffffff;
   --mdc-filled-text-field-focus-label-text-color: #ffffff;
+}
+
+.mat-mdc-menu-item {
+  --mat-menu-item-label-text-color: #ffffff;
+  --mat-menu-item-hover-state-layer-color: #44C1F2;
+
+  &:hover {
+    --mat-menu-item-label-text-color: #0A0F26;
+  }
+}
+
+.mat-mdc-menu-content {
+  padding: 0 !important;
 }

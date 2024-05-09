@@ -4,11 +4,12 @@ import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { UserState } from '../../state-management/user/user.state';
 import { AsyncPipe } from '@angular/common';
+import {MatMenuModule} from '@angular/material/menu';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, MatMenuModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
