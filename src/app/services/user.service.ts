@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { UserStateModel } from '../state-management/user/user.state';
 import { SetUserData } from '../state-management/user/user.actions';
+import { DateTime } from 'luxon';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ import { SetUserData } from '../state-management/user/user.actions';
 export class UserService {
 
   constructor(private http: HttpClient,
-    private store: Store, 
+    private store: Store,
     private router: Router
   ) { }
 
@@ -26,12 +27,21 @@ export class UserService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     localStorage.removeItem('refresh_token');
-    this.updateState();
+    this.resetState();
     this.router.navigate(['/login']);
   }
 
+  public isLoggedIn(): boolean {
+    return localStorage.getItem('expires_at') && DateTime.now() < this.getExpiration();
+  }
 
-  private updateState(): void {
+  private getExpiration(): DateTime {
+    const expiration = localStorage.getItem('expires_at');
+    const expiresAt = JSON.parse(expiration);
+    return DateTime.fromMillis(expiresAt);
+  }
+
+  private resetState(): void {
     const payload: UserStateModel = {
       username: null,
       isAuthenticated: false,

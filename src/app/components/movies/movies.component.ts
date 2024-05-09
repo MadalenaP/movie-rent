@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-movies',
@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
   templateUrl: './movies.component.html',
   styleUrl: './movies.component.scss'
 })
-export class MoviesComponent {
+export class MoviesComponent implements OnInit {
+ngOnInit(): void {
 
+}
 }

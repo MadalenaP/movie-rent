@@ -18,6 +18,8 @@ button {
   border-radius: 4px;
   font-weight: bold;
   font-size: 14px;
+  background-color: transparent;
+  border: none;
 
   &.primary {
     background-color: #44C1F2;
@@ -26,6 +28,31 @@ button {
 
     &:hover {
       background-color: #88d7f7;
+    }
+  }
+
+  &.secondary {
+    color: #44C1F2;
+    border: 1px solid #44C1F2;
+
+    &:hover {
+      border: 1px solid #88d7f7;
+      color: #88d7f7;
+    }
+  }
+
+  &.tetriary {
+    color: #44C1F2;
+
+    &:hover {
+      color: #88d7f7;
+    }
+  }
+
+  &.icon-btn {
+    padding: 0;
+    span {
+      font-size: 30px;
     }
   }
 }

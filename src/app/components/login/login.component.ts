@@ -6,7 +6,7 @@ import { UserService } from '../../services/user.service';
 import { Store } from '@ngxs/store';
 import { Subject, catchError, filter, of, takeUntil, tap } from 'rxjs';
 import * as jwt from 'jwt-decode';
-import moment from 'moment';
+import { DateTime } from 'luxon';
 import { ILoginResponse } from '../../interfaces/ILoginResponse';
 import { UserStateModel } from '../../state-management/user/user.state';
 import { SetUserData } from '../../state-management/user/user.actions';
@@ -79,7 +79,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   private setSession(authResult: ILoginResponse): void {
-    const expiresAt = moment().add(jwt.jwtDecode(authResult.access)['exp'],'second');
+    const expiresAt = DateTime.now().plus({milliseconds: jwt.jwtDecode(authResult.access)['exp']});
+    // const expiresAt = DateTime.now().plus({milliseconds: 60000});
     localStorage.setItem('id_token', authResult.access);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
     localStorage.setItem('refresh_token', authResult.refresh);
