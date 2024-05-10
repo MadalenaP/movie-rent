@@ -1,0 +1,6 @@
+@if (movieDetails) {
+  <div class="movie-card">
+    <div class="img-container"><img [src]="movieDetails.poster_url" onerror="this.onerror=null;this.src='/assets/images/default_image.jpg';"></div>
+    <title>{{movieDetails.title}}</title>
+  </div>
+}

@@ -1,0 +1,31 @@
+.movie-card {
+  width: 200px;
+  height: 300px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+
+  .img-container {
+    width: 100%;
+    height: 85%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+    }
+  }
+
+  title {
+    padding: 8px 10px;
+  }
+
+  &:hover {
+    background-color: #10213B;
+//background: radial-gradient(circle, rgba(64,190,241,1) 0%, rgba(10,15,38,1) 99%);
+    border: 1px solid #40BEF1;
+    transform: scale(1.1);
+    transition: 0.3s;
+   // box-shadow: 0 0 40px 0 #10213B;
+  }
+}

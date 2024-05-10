@@ -1,10 +1,16 @@
 @if(movies && movies.length) {
-  <ul>
+  <ul class="movies-list">
     @for(movie of movies; track movie.uuid;) {
-      <li>{{movie.title}}</li>
+      <li tabindex="1" (click)="goToMovie(movie.uuid)" (keydown.enter)="goToMovie(movie.uuid)"><app-movie-list-item [movieDetails]="movie"></app-movie-list-item></li>
     }  
   </ul>
   <mat-paginator #paginator [length]="paginatorConfig.listSize" [pageSize]="paginatorConfig.pageSize" [pageSizeOptions]="paginatorConfig.pageSizeOptions" 
   (page)="handlePaginatorChange($event)">
   </mat-paginator>
+}
+@else if (isLoading) {
+  loading indicator
+}
+@else {
+  there are no movies
 }

@@ -5,5 +5,5 @@ export interface IMovie {
   duration: number;
   rating: number;
   description: string;
-  posterUrl: string;
+  poster_url: string;
 }
