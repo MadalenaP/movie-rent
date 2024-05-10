@@ -23,6 +23,7 @@ export class UserService {
   ) { }
 
   public login(loginData: ILoginData): Observable<ILoginResponse> {
+    console.log('in')
     return this.http.post<ILoginResponse>('/api/auth/login/', loginData);
   }
 

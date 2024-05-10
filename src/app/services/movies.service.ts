@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { IMovie } from '../interfaces/IMovie';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { IMovieListResponse } from '../interfaces/IMovieListResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class MoviesService {
 
   constructor(private http: HttpClient) { }
 
-  public getMovies<T>(page: number, pageSize: number): Observable<any> {
-    return this.http.get<T>(`/api/rent-store/movies/?page=${page}&page_size=${pageSize}`);
+  public getMovies(page: number, pageSize: number): Observable<IMovieListResponse> {
+    return this.http.get<IMovieListResponse>(`/api/rent-store/movies/?page=${page}&page_size=${pageSize}`);
   }
 }

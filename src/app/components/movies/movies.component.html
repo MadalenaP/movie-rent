@@ -1,1 +1,10 @@
-<p>movies works!</p>
+@if(movies && movies.length) {
+  <ul>
+    @for(movie of movies; track movie.uuid;) {
+      <li>{{movie.title}}</li>
+    }  
+  </ul>
+  <mat-paginator #paginator [length]="paginatorConfig.listSize" [pageSize]="paginatorConfig.pageSize" [pageSizeOptions]="paginatorConfig.pageSizeOptions" 
+  (page)="handlePaginatorChange($event)">
+  </mat-paginator>
+}

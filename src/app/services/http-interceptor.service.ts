@@ -12,19 +12,15 @@ export class HttpInterceptorService implements HttpInterceptor {
   constructor(private localStorageService: LocalstorageService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const authToken = this.localStorageService.getItem('id_token');
-
-    //const authToken =jwt.jwtDecode(this.localStorageService.getItem('id_token'))['jti'] ;
-    console.log('in')
-    if (authToken) {
+    const id_token = this.localStorageService.getItem('id_token');
+    if (id_token) {
       const authReq = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${authToken}`
+          Authorization: `Bearer ${id_token}`
         }
       });
       return next.handle(authReq);
     }
-    // If there is no token, pass the original request
     return next.handle(req);
   }
 }
