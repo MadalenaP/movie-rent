@@ -18,6 +18,11 @@
   justify-content: space-between;
   height: auto;
 
+  .header {
+    display: flex;
+    justify-content: space-between;
+  }
+
   title {
     font-size: 2em;
   }

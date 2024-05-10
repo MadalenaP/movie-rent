@@ -1,1 +1,5 @@
-<p>star-rating works!</p>
+<div class="stars-container">
+  @for(item of [1, 2, 3, 4, 5]; track item; let index = $index) {
+    <span class="star material-symbols-outlined" [class.filled]="index < value" [class.disabled]="disabled" (click)="rate(index + 1)">star</span>
+  }
+</div>
