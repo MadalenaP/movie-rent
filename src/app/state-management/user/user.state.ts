@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { SetIsAdmin, SetIsAuthenticated, SetUserData, SetUserId } from "./user.actions";
+import {  SetIsAdmin, SetIsAuthenticated, SetUserData, SetUserId } from "./user.actions";
 
 
 export class UserStateModel {

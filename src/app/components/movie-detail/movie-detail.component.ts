@@ -15,6 +15,7 @@ import { StarRatingComponent } from '../star-rating/star-rating.component';
 export class MovieDetailComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
   protected movie: IMovie;
+  protected isRented: boolean = false;
 
   constructor(
     private moviesService: MoviesService,
@@ -37,6 +38,13 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         this.moviesService.getMovieById(params['id'])
       ),
       tap((movie) => this.movie = movie),
+      takeUntil(this.destroy$)
+    ).subscribe();
+  }
+
+  public rentMovie(): void {
+    this.moviesService.rentMovie(this.movie.uuid).pipe(
+      tap((result) => this.isRented = result.movie === this.movie.title),
       takeUntil(this.destroy$)
     ).subscribe();
   }

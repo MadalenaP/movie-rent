@@ -1,12 +1,16 @@
+@if(movie) {
 <section class="movie-detail-container">
-  <div class="img-container"><img [src]="movie.poster_url" onerror="this.onerror=null;this.src='/assets/images/default_image.jpg';"></div>
+  <div class="img-container"><img [src]="movie.poster_url"
+      onerror="this.onerror=null;this.src='/assets/images/default_image.jpg';"></div>
   <div class="content-container">
     <div class="header">
       <div>
         <title>{{movie.title}}</title>
         <app-star-rating [value]="2" [disabled]="true"></app-star-rating>
       </div>
-      <button class="primary">Rent movie</button>
+      @if(!isRented) {
+      <button class="primary" (click)="rentMovie()">Rent movie</button>
+      }
     </div>
     <div>
       <div>{{movie.pub_date}} - {{movie.duration}}min</div>
@@ -14,3 +18,4 @@
     </div>
   </div>
 </section>
+}

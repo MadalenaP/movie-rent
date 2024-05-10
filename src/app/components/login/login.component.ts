@@ -66,7 +66,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.userService.login(this.loginForm.value).pipe(
       catchError((err) => {
         this.showErrorMessage = true;
-        console.log('err', err)
         return of(err);
       }),
       filter((respose) => respose.access),
