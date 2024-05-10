@@ -25,6 +25,11 @@ export class UserState  {
   static isAuthenticated(state: UserStateModel): boolean {
     return state.isAuthenticated;
   }
+
+  @Selector()
+  static isAdmin(state: UserStateModel): boolean {
+    return state.isAdmin;
+  }
   
   @Action(SetUserData)
   SetUserData(ctx: StateContext<UserStateModel>, payload: {userData: UserStateModel}): void {

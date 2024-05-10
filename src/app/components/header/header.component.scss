@@ -11,3 +11,17 @@
   font-size: 24px;
   font-weight: bold;
 }
+
+.bottom-part {
+  margin-top: 10px;
+
+  .nav-item {
+    padding: 5px 10px;
+    font-size: 18px;
+  
+    &:hover,
+    &.active {
+      border-bottom: 2px solid #88d7f7;
+    }
+  }
+}
