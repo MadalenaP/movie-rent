@@ -1,0 +1,24 @@
+.movie-detail-container {
+  display: flex;
+  gap: 30px;
+  margin-top: 40px;
+
+  .img-container {
+    border-radius: 10px;
+
+    img {
+      border-radius: 10px;
+    }
+  }
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
+
+  title {
+    font-size: 2em;
+  }
+}
