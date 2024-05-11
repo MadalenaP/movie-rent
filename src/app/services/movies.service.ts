@@ -29,4 +29,8 @@ export class MoviesService {
     const body = {movie: movieId};
     return this.http.post<IRentalPartial>(`/api/rent-store/rentals/`, body);
   }
+
+  public returnMovie(movieId: string): Observable<any> {
+    return this.http.patch<any>(`/api/rent-store/rentals/${movieId}`, {});
+  }
 }
