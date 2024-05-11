@@ -10,4 +10,5 @@ export interface IRental extends IRentalPartial{
   return_date: string;
   is_paid: boolean;
   charge: number;
+  is_active?: boolean;
 }

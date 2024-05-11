@@ -1,21 +1,25 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Subject, catchError, of, takeUntil, tap } from 'rxjs';
+import { Observable, Subject, catchError, of, take, takeUntil, tap } from 'rxjs';
 import { MoviesService } from '../../services/movies.service';
 import { IRental } from '../../interfaces/IRental';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
-import { Store } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { GetProfile } from '../../state-management/user/user.actions';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { UserState } from '../../state-management/user/user.state';
+import { rentalsAdminColumns, rentalsUserColumns } from '../../configs/rentals-table';
 
 @Component({
   selector: 'app-rentals',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatSort, MatSortModule],
+  imports: [MatTableModule, MatPaginatorModule, MatSort, MatSortModule, MatCheckboxModule],
   templateUrl: './rentals.component.html',
   styleUrl: './rentals.component.scss'
 })
 export class RentalsComponent implements OnInit, OnDestroy, AfterViewInit {
+  @Select(UserState.isAdmin) isAdmin$: Observable<boolean>;
   @ViewChild(MatSort) sort: MatSort;
   private destroy$: Subject<boolean> = new Subject<boolean>();
   protected rentals: IRental[];
@@ -27,7 +31,8 @@ export class RentalsComponent implements OnInit, OnDestroy, AfterViewInit {
     pageSizeOptions: [5, 10, 25, 100]
   };
   protected isLoading: boolean = false;
-  displayedColumns: string[] = ['movie', 'rental_date', 'return_date', 'is_paid', 'charge', 'actions'];
+  protected isAdmin: boolean = false;
+  protected displayedColumns: string[] = [];
 
 
   constructor(
@@ -37,6 +42,7 @@ export class RentalsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.getRentals();
+    this.getUserRole();
   }
 
   ngAfterViewInit() {
@@ -48,11 +54,25 @@ export class RentalsComponent implements OnInit, OnDestroy, AfterViewInit {
     this.destroy$.unsubscribe();
   }
 
+  private getUserRole(): void {
+    this.isAdmin$.pipe(
+      tap((isAdmin) => {
+        this.isAdmin = isAdmin;
+        this.setTableColumns();
+      } ),
+      takeUntil(this.destroy$)
+    ).subscribe();
+  }
+
+  private setTableColumns(): void {
+    this.displayedColumns = this.isAdmin ? rentalsAdminColumns : rentalsUserColumns;
+  }
+
   private getRentals(): void {
     this.isLoading = true;
     this.moviesService.getRentals(this.paginatorConfig.pageIndex + 1, this.paginatorConfig.pageSize).pipe(
       tap((result) => {
-        this.rentals = result.results;
+        this.rentals = result.results.map((item) => { return {...item, is_active: !item.return_date }});
         this.rentalDataSource = new MatTableDataSource<IRental>(this.rentals);
         this.rentalDataSource.sort = this.sort;
         this.paginatorConfig.listSize = result.count;
