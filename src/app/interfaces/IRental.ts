@@ -9,4 +9,5 @@ export interface IRental extends IRentalPartial{
   uuid: string;
   return_date: string;
   is_paid: boolean;
+  charge: number;
 }
