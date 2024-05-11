@@ -93,7 +93,6 @@ export class UserState {
   GetProfile(ctx: StateContext<UserStateModel>): Observable<IProfile> {
     return this.userService.getuserProfile().pipe(
       tap((profile) => {
-        console.log('profile', profile);
         ctx.patchState({
           email: profile.email,
           first_name: profile.first_name,

@@ -2,9 +2,9 @@ import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular
 import { Subject, catchError, of, takeUntil, tap } from 'rxjs';
 import { MoviesService } from '../../services/movies.service';
 import { IRental } from '../../interfaces/IRental';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import {MatSort, Sort, MatSortModule} from '@angular/material/sort';
+import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { Store } from '@ngxs/store';
 import { GetProfile } from '../../state-management/user/user.actions';
 
@@ -40,7 +40,7 @@ export class RentalsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-   // this.rentalDataSource.paginator = this.paginator;
+    // this.rentalDataSource.paginator = this.paginator;
   }
 
   ngOnDestroy(): void {
@@ -75,7 +75,7 @@ export class RentalsComponent implements OnInit, OnDestroy, AfterViewInit {
       tap(() => {
         this.getRentals();
         this.store.dispatch(new GetProfile);
-  }),
+      }),
       takeUntil(this.destroy$)
     ).subscribe();
   }
