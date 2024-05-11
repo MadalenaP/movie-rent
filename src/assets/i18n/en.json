@@ -1,0 +1,19 @@
+{
+  "header": {
+    "nav": {
+      "movies": "Movies",
+      "my_rentals": "My rentals",
+      "all_rentals": "All rentals",
+      "movie_management": "Movie management",
+      "statistics": "Statistics"
+    }
+  },
+  "login": {
+    "login": "Log in",
+    "wrong_data": "Wrong data"
+  },
+  "profile": {
+    "balance": "Your balance is:",
+    "update": "Update your balance"
+  }
+}

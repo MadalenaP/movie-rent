@@ -9,7 +9,7 @@
       <mat-label>Password</mat-label>
       <input matInput formControlName="password" required />
     </mat-form-field>
-    <button type="submit" class="primary">Log in</button>
-    @if(showErrorMessage) {<div>Wrong data</div>}
+    <button type="submit" class="primary">{{'login.login' | translate}}</button>
+    @if(showErrorMessage) {<div>{{'login.wrong_data' | translate}}</div>}
   </form>
 </section>

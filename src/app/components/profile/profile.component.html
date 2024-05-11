@@ -10,9 +10,9 @@
       </div>
       <div>
         <div class="balance">
-          Your balance is: {{profileData.wallet | currency : 'EUR'}}
+          {{'profile.balance' | translate }} {{profileData.wallet | currency : 'EUR'}}
         </div>
-        <button class="primary" (click)="updateBalance()">Update your balance</button>
+        <button class="primary" (click)="updateBalance()"> {{'profile.update' | translate }}</button>
       </div>
     </div>
   </section>

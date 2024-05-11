@@ -23,6 +23,8 @@
     "@angular/platform-server": "^17.2.0",
     "@angular/router": "^17.2.0",
     "@angular/ssr": "^17.2.1",
+    "@ngx-translate/core": "^15.0.0",
+    "@ngx-translate/http-loader": "^8.0.0",
     "@ngxs/devtools-plugin": "^3.8.2",
     "@ngxs/logger-plugin": "^3.8.2",
     "@ngxs/store": "^3.8.2",

@@ -5,10 +5,11 @@ import { MatInputModule } from '@angular/material/input';
 import { UserService } from '../../services/user.service';
 import { Subject, catchError, filter, of, takeUntil, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatFormFieldModule, FormsModule, ReactiveFormsModule, MatInputModule],
+  imports: [MatFormFieldModule, FormsModule, ReactiveFormsModule, MatInputModule, TranslateModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

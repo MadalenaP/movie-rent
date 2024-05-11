@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { UserService } from './services/user.service';
 import { LocalstorageService } from './services/localstorage.service';
-import { HttpInterceptorService } from './services/http-interceptor.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   constructor(
     private userService: UserService,
     private localStorageService: LocalstorageService,
-    private httpInterceptor: HttpInterceptorService
+    private translateService: TranslateService
   ) {
   }
   
@@ -25,5 +25,6 @@ export class AppComponent implements OnInit {
     if (this.userService.isLoggedIn()) {
       this.userService.updateState(this.localStorageService.getItem('id_token'));
     }
+    this.translateService.use('en');
   }
 }

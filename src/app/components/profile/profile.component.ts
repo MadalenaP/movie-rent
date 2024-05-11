@@ -6,11 +6,12 @@ import { UserState } from '../../state-management/user/user.state';
 import { AsyncPipe, CurrencyPipe, UpperCasePipe } from '@angular/common';
 import {  MatDialog } from '@angular/material/dialog';
 import { BalanceDialogComponent } from '../balance-dialog/balance-dialog.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [AsyncPipe, UpperCasePipe, CurrencyPipe],
+  imports: [AsyncPipe, UpperCasePipe, CurrencyPipe, TranslateModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })

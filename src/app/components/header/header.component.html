@@ -3,17 +3,23 @@
   <div class="upper-part">
     <div class="logo">Movie rental app</div>
     <div class="action-btns">
+      <button class="icon-btn tetriary" [matMenuTriggerFor]="languageMenu"><span class="material-symbols-outlined">language</span></button>
       <button class="icon-btn tetriary" [matMenuTriggerFor]="userMenu"><span class="material-symbols-outlined">person</span></button>
       <mat-menu #userMenu="matMenu">
         <button mat-menu-item [routerLink]="'/profile'">My profile</button>
         <button mat-menu-item (click)="logout()">Log out</button>
+      </mat-menu>
+      <mat-menu #languageMenu="matMenu">
+        @for(lang of availableLanguages; track lang.code) {
+          <button mat-menu-item (click)="changeLang(lang.code)">{{lang.title}}</button>
+        }
       </mat-menu>
     </div>
   </div>
   <div class="bottom-part">
     <nav>
       @for(item of navItems; track item.title) {
-        <a [routerLink]="item.route" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-item">{{item.title}}</a>
+        <a [routerLink]="item.route" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-item">{{'header.nav.' + item.title | translate }}</a>
       }
     </nav>
   </div>

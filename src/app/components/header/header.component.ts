@@ -8,11 +8,14 @@ import {MatMenuModule} from '@angular/material/menu';
 import { INavItem } from '../../interfaces/INavItem';
 import { AmdinNav, UserNav } from '../../configs/navigation';
 import { RouterLink, RouterModule } from '@angular/router';
+import { availableLanguages } from '../../configs/languages';
+import { ILanguage } from '../../interfaces/ILanguage';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [AsyncPipe, MatMenuModule, RouterLink, RouterModule],
+  imports: [AsyncPipe, MatMenuModule, RouterLink, RouterModule, TranslateModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -21,9 +24,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Select(UserState.isAdmin) isAdmin$: Observable<boolean>;
   private destroy$: Subject<boolean> = new Subject<boolean>();
   protected navItems: INavItem[] = [];
+  protected availableLanguages: ILanguage[] = availableLanguages;
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -44,5 +49,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public logout(): void {
     this.userService.logout();
+  }
+
+  public changeLang(lang: string): void {
+    this.translateService.use(lang);
   }
 }
