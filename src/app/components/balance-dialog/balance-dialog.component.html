@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Balance update</h2>
+<mat-dialog-content>
+  <p>Your current balance is:  {{data | currency : 'EUR'}}</p>
+  <mat-form-field>
+    <mat-label>Add</mat-label>
+    <input type="number" [min]="1" matInput [(ngModel)]="moneyToAdd" required>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions class="action-btns">
+  <button class="secondary" [mat-dialog-close]>Cancel</button>
+  <button class="primary" (click)="updateBalance()" [disabled]="!moneyToAdd">Update</button>
+</mat-dialog-actions>

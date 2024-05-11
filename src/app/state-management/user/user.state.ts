@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { GetProfile, SetIsAdmin, SetIsAuthenticated, SetUserData, SetUserId } from "./user.actions";
+import { GetProfile, SetIsAdmin, SetIsAuthenticated, SetUserData, SetUserId, UpdateBalance } from "./user.actions";
 import { UserService } from "../../services/user.service";
 import { Observable, tap } from "rxjs";
 import { IProfile } from "../../interfaces/IProfile";
@@ -102,5 +102,16 @@ export class UserState {
         })
       })
     );
+  }
+
+  @Action(UpdateBalance)
+  UpdateBalance(ctx: StateContext<UserStateModel>, payload: { newBalance: number }): Observable<{deposit: number}> {
+   return this.userService.updateBalance(payload.newBalance).pipe(
+      tap((response) => {
+        ctx.patchState({
+          wallet: response.deposit
+        });
+      })
+    )
   }
 }

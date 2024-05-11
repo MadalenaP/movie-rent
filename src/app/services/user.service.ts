@@ -31,6 +31,10 @@ export class UserService {
     return this.http.get<IProfile>('/api/rent-store/profile/');
   }
 
+  public updateBalance(newBalance: number): Observable<{deposit: number}> {
+    return this.http.patch<{deposit: number}>('/api/rent-store/profile/', {deposit: newBalance});
+  }
+
   public logout(): void {
     this.localStorageService.removeItem('id_token');
     this.localStorageService.removeItem('expires_at');
@@ -70,11 +74,11 @@ export class UserService {
     this.store.dispatch(new SetUserData(payload));
   }
 
- 
   public updateState(authToken: string): void {
     this.store.dispatch(new SetIsAuthenticated(true));
     this.store.dispatch(new SetUserId(jwt.jwtDecode(authToken)['user_id']));
     this.store.dispatch(new SetIsAdmin(jwt.jwtDecode(authToken)['is_admin']));
     this.store.dispatch(new GetProfile);
   }
+
 }

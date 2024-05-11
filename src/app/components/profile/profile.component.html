@@ -1,4 +1,4 @@
-@if(userProfile$ | async; as profileData) {
+@if(profileData) {
   <section class="profile">
     <div class="avatar">
       <span class="material-symbols-outlined">person</span>
@@ -12,7 +12,7 @@
         <div class="balance">
           Your balance is: {{profileData.wallet | currency : 'EUR'}}
         </div>
-        <button class="primary">Update your balance</button>
+        <button class="primary" (click)="updateBalance()">Update your balance</button>
       </div>
     </div>
   </section>

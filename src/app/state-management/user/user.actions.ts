@@ -23,3 +23,8 @@ export class SetIsAdmin {
 export class GetProfile {
   static readonly type = '[User] Get profile';
 }
+
+export class UpdateBalance {
+  static readonly type = '[User] Update balance';
+  constructor(public newBalance: number) {}
+}
