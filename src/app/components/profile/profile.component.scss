@@ -1,0 +1,40 @@
+.profile {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+
+  .avatar span {
+    font-size: 200px;
+  }
+
+  .data-container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: space-between;
+
+    .name {
+      font-size: 2em;
+    }
+  
+    .email {
+      font-size: .9em;
+    }
+  
+    button {
+      margin-top: 10px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .profile {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .data-container {
+    min-height: 200px;
+    margin: auto;
+  }
+}

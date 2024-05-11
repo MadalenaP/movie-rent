@@ -19,3 +19,7 @@ export class SetIsAdmin {
   static readonly type = '[User] Set isAdmin';
   constructor(public isAdmin: boolean) {}
 }
+
+export class GetProfile {
+  static readonly type = '[User] Get profile';
+}

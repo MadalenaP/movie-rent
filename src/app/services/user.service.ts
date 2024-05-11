@@ -6,10 +6,11 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { UserStateModel } from '../state-management/user/user.state';
-import { SetIsAdmin, SetIsAuthenticated, SetUserData, SetUserId } from '../state-management/user/user.actions';
+import { GetProfile, SetIsAdmin, SetIsAuthenticated, SetUserData, SetUserId } from '../state-management/user/user.actions';
 import { DateTime } from 'luxon';
 import * as jwt from 'jwt-decode';
 import { LocalstorageService } from './localstorage.service';
+import { IProfile } from '../interfaces/IProfile';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +24,11 @@ export class UserService {
   ) { }
 
   public login(loginData: ILoginData): Observable<ILoginResponse> {
-    console.log('in')
     return this.http.post<ILoginResponse>('/api/auth/login/', loginData);
+  }
+
+  public getuserProfile(): Observable<IProfile> {
+    return this.http.get<IProfile>('/api/rent-store/profile/');
   }
 
   public logout(): void {
@@ -57,7 +61,11 @@ export class UserService {
       username: null,
       isAuthenticated: false,
       userId: null,
-      isAdmin: false
+      isAdmin: false,
+      email: null,
+      first_name: null,
+      last_name: null,
+      wallet: 0
     };
     this.store.dispatch(new SetUserData(payload));
   }
@@ -67,5 +75,6 @@ export class UserService {
     this.store.dispatch(new SetIsAuthenticated(true));
     this.store.dispatch(new SetUserId(jwt.jwtDecode(authToken)['user_id']));
     this.store.dispatch(new SetIsAdmin(jwt.jwtDecode(authToken)['is_admin']));
+    this.store.dispatch(new GetProfile);
   }
 }

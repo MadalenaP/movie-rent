@@ -5,6 +5,7 @@
     <div class="action-btns">
       <button class="icon-btn tetriary" [matMenuTriggerFor]="userMenu"><span class="material-symbols-outlined">person</span></button>
       <mat-menu #userMenu="matMenu">
+        <button mat-menu-item [routerLink]="'/profile'">My profile</button>
         <button mat-menu-item (click)="logout()">Log out</button>
       </mat-menu>
     </div>

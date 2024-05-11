@@ -4,6 +4,7 @@ import { MoviesComponent } from './components/movies/movies.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
 import { RentalsComponent } from './components/rentals/rentals.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'movies' },
@@ -22,5 +23,11 @@ export const routes: Routes = [
     path: 'rentals',
     component: RentalsComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   }
+
 ];

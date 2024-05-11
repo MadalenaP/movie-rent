@@ -17,9 +17,9 @@ import { RouterLink, RouterModule } from '@angular/router';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  private destroy$: Subject<boolean> = new Subject<boolean>();
   @Select(UserState.isAuthenticated) isAuthenticated$: Observable<boolean>;
   @Select(UserState.isAdmin) isAdmin$: Observable<boolean>;
+  private destroy$: Subject<boolean> = new Subject<boolean>();
   protected navItems: INavItem[] = [];
 
   constructor(
