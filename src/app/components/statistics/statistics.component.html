@@ -1,1 +1,17 @@
-<p>statistics works!</p>
+@if(isReady) {
+  <div class="chart-container">
+    <ngx-charts-bubble-chart
+      [view]="[1000, 500]"
+      [scheme]="'nightLights'"
+      [results]="chartData"
+      [xAxis]="true"
+      [yAxis]="true"
+      [legend]="true"
+      [showGridLines]="false"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxisLabel]="'Year'"
+      [yAxisLabel]="'Number of movies'">
+    </ngx-charts-bubble-chart>
+  </div>
+}
