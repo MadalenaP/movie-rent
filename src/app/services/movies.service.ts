@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IMovieListResponse } from '../interfaces/IMovieListResponse';
 import { IRentalResponse } from '../interfaces/IRentalResponse';
 import { IRentalPartial } from '../interfaces/IRental';
+import { ICategory } from '../interfaces/ICategory';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,11 @@ export class MoviesService {
     return this.http.post<IRentalPartial>(`/api/rent-store/rentals/`, body);
   }
 
-  public returnMovie(movieId: string): Observable<any> {
-    return this.http.patch<any>(`/api/rent-store/rentals/${movieId}`, {});
+  public returnMovie(movieId: string): Observable<string> {
+    return this.http.patch<string>(`/api/rent-store/rentals/${movieId}`, {});
+  }
+
+  public getCategories(): Observable<ICategory[]> {
+    return this.http.get<ICategory[]>(`/api/rent-store/categories`);
   }
 }

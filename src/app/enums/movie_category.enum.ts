@@ -1,0 +1,23 @@
+export enum MOVIE_CATEGORY {
+  crime = 'Crime',
+  drama = 'Drama',
+  action = 'Action',
+  bioraphy = 'Biography',
+  history = 'History',
+  adventure = 'Adventure',
+  fantasy = 'Fantasy',
+  western = 'Western',
+  comedy = 'Comedy', 
+  romance ='Romance',
+  sci_fi = 'Sci-Fi',
+  mystery = 'Mystery',
+  thriller = 'Thriller',
+  family = 'Family',
+  war = 'War',
+  animation = 'Animation',
+  horror = 'Horror',
+  music = 'Music',
+  flim_noir = 'Film-Noir', 
+  musical = 'Musical',
+  sport = 'Sport'
+};

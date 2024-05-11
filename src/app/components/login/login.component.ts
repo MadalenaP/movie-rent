@@ -3,13 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveF
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { UserService } from '../../services/user.service';
-import { Store } from '@ngxs/store';
 import { Subject, catchError, filter, of, takeUntil, tap } from 'rxjs';
-import * as jwt from 'jwt-decode';
-import { DateTime } from 'luxon';
-import { ILoginResponse } from '../../interfaces/ILoginResponse';
-import { UserStateModel } from '../../state-management/user/user.state';
-import { SetUserData } from '../../state-management/user/user.actions';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
@@ -25,7 +19,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private userService: UserService,
-    private store: Store, 
     private router: Router,
     private formBuilder: FormBuilder) { }
 

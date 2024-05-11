@@ -1,10 +1,10 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Observable, Subject, catchError, of, take, takeUntil, tap } from 'rxjs';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Observable, Subject, catchError, of, takeUntil, tap } from 'rxjs';
 import { MoviesService } from '../../services/movies.service';
 import { IRental } from '../../interfaces/IRental';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { Select, Store } from '@ngxs/store';
 import { GetProfile } from '../../state-management/user/user.actions';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -18,7 +18,7 @@ import { rentalsAdminColumns, rentalsUserColumns } from '../../configs/rentals-t
   templateUrl: './rentals.component.html',
   styleUrl: './rentals.component.scss'
 })
-export class RentalsComponent implements OnInit, OnDestroy, AfterViewInit {
+export class RentalsComponent implements OnInit, OnDestroy {
   @Select(UserState.isAdmin) isAdmin$: Observable<boolean>;
   @ViewChild(MatSort) sort: MatSort;
   private destroy$: Subject<boolean> = new Subject<boolean>();
@@ -43,10 +43,6 @@ export class RentalsComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
     this.getRentals();
     this.getUserRole();
-  }
-
-  ngAfterViewInit() {
-    // this.rentalDataSource.paginator = this.paginator;
   }
 
   ngOnDestroy(): void {

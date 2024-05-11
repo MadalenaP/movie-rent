@@ -1,1 +1,28 @@
-<p>movie-management works!</p>
+<div class="btn-container">
+  <button class="secondary" (click)="addMovie()">Add movie</button>
+</div>
+<table mat-table matSort [dataSource]="moviesDataSource">
+  <!-- movie title column -->
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Movie title</th>
+    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+  </ng-container>
+
+  <!-- actions column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element"> 
+      @if(!element.return_date) {
+        <button class="icon-btn" (click)="editMovie(element.uuid)"><span class="material-symbols-outlined">edit</span></button>
+        <button class="icon-btn" (click)="deleteMovie(element.uuid)"><span class="material-symbols-outlined">delete</span></button>
+      }  
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator #paginator [length]="paginatorConfig.listSize" [pageSize]="paginatorConfig.pageSize" [pageSizeOptions]="paginatorConfig.pageSizeOptions" 
+(page)="handlePaginatorChange($event)">
+
+
