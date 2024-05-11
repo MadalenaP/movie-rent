@@ -68,8 +68,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
         });
       }
     });
-    this.isReady = true
-    console.log('mapped', this.chartData);
+    this.isReady = true;
   }
 
 }

@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { IMovie } from '../../interfaces/IMovie';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
 import { ICategory } from '../../interfaces/ICategory';
-import { Subject, tap, takeUntil, take } from 'rxjs';
+import { Subject, tap, takeUntil } from 'rxjs';
 import { MoviesService } from '../../services/movies.service';
 import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -99,6 +99,5 @@ export class MovieEditDialogComponent implements OnInit, OnDestroy {
       ).subscribe();
     } 
   }
-
 
 }

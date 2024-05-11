@@ -51,7 +51,6 @@ export class MovieManagementComponent implements OnInit, OnDestroy {
         this.moviesDataSource.sort = this.sort;
         this.paginatorConfig.listSize = result.count;
         this.isLoading = false;
-        console.log('movies', this.movies)
       }),
       takeUntil(this.destroy$)
     ).subscribe();

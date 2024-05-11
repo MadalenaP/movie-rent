@@ -73,7 +73,6 @@ export class RentalsComponent implements OnInit, OnDestroy {
         this.rentalDataSource.sort = this.sort;
         this.paginatorConfig.listSize = result.count;
         this.isLoading = false;
-        console.log('rentals', this.rentals)
       }),
       takeUntil(this.destroy$)
     ).subscribe();

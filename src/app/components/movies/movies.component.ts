@@ -45,7 +45,6 @@ export class MoviesComponent implements OnInit, OnDestroy {
         this.movies = result.results;
         this.paginatorConfig.listSize = result.count;
         this.isLoading = false;
-        console.log('movies', this.movies)
       }),
       takeUntil(this.destroy$)
     ).subscribe();

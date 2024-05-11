@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MoviesService } from '../../services/movies.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subject, filter, switchMap, takeUntil, tap } from 'rxjs';
 import { IMovie } from '../../interfaces/IMovie';
 import { StarRatingComponent } from '../star-rating/star-rating.component';
