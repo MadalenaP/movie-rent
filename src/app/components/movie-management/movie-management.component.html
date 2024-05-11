@@ -11,10 +11,10 @@
   <!-- actions column -->
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element"> 
+    <td mat-cell *matCellDef="let element" class="action-icons"> 
       @if(!element.return_date) {
-        <button class="icon-btn" (click)="editMovie(element)"><span class="material-symbols-outlined">edit</span></button>
-        <button class="icon-btn" (click)="deleteMovie(element.uuid)"><span class="material-symbols-outlined">delete</span></button>
+        <button class="tetriary icon-btn" (click)="editMovie(element)"><span class="material-symbols-outlined">edit</span></button>
+        <button class="tetriary icon-btn" (click)="deleteMovie(element.uuid)"><span class="material-symbols-outlined">delete</span></button>
       }  
     </td>
   </ng-container>

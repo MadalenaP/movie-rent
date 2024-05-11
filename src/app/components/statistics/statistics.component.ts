@@ -1,13 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MoviesService } from '../../services/movies.service';
-import { Subject, takeUntil, tap } from 'rxjs';
+import { Subject, of, switchMap, takeUntil, tap } from 'rxjs';
 import { IMovie } from '../../interfaces/IMovie';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { LoadingIndicatorComponent } from '../loading-indicator/loading-indicator.component';
 
 @Component({
   selector: 'app-statistics',
   standalone: true,
-  imports: [NgxChartsModule],
+  imports: [NgxChartsModule, LoadingIndicatorComponent],
   templateUrl: './statistics.component.html',
   styleUrl: './statistics.component.scss'
 })
@@ -29,12 +30,17 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 
   private getData(): void {
     this.isReady = false;
-    let count =0;
-    this.moviesService.getMovies(1, 200).pipe(
-      tap((response) => {
-        count = response.count;
-        this.mapData(response.results);
+    let count = 100;
+    // since we don't have the count of the movies, will try with a number and if we see that actual count is larger, we will call again
+    this.moviesService.getMovies(1, count).pipe(
+      switchMap((response) => {
+        if (response.count <= count) {
+          return of(response)
+        } else {
+          return this.moviesService.getMovies(1, response.count);
+        }
       }),
+      tap((response) => this.mapData(response.results)),
       takeUntil(this.destroy$)
     ).subscribe();
   }

@@ -5,11 +5,12 @@ import { Subject, takeUntil, tap } from 'rxjs';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MovieListItemComponent } from '../movie-list-item/movie-list-item.component';
 import { Router } from '@angular/router';
+import { LoadingIndicatorComponent } from '../loading-indicator/loading-indicator.component';
 
 @Component({
   selector: 'app-movies',
   standalone: true,
-  imports: [MatPaginatorModule, MovieListItemComponent],
+  imports: [MatPaginatorModule, MovieListItemComponent, LoadingIndicatorComponent],
   templateUrl: './movies.component.html',
   styleUrl: './movies.component.scss'
 })
