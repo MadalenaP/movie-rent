@@ -1,3 +1,5 @@
+import { MOVIE_CATEGORY } from "../enums/movie_category.enum";
+
 export interface IMovie {
   uuid?: string;
   title: string;
@@ -5,6 +7,6 @@ export interface IMovie {
   duration: number;
   rating: number;
   description: string;
-  poster_url: string;
-  categories: string[];
+  poster_url?: string;
+  categories: MOVIE_CATEGORY[];
 }

@@ -13,7 +13,7 @@
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element"> 
       @if(!element.return_date) {
-        <button class="icon-btn" (click)="editMovie(element.uuid)"><span class="material-symbols-outlined">edit</span></button>
+        <button class="icon-btn" (click)="editMovie(element)"><span class="material-symbols-outlined">edit</span></button>
         <button class="icon-btn" (click)="deleteMovie(element.uuid)"><span class="material-symbols-outlined">delete</span></button>
       }  
     </td>

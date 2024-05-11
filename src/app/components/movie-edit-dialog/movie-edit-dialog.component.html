@@ -1,1 +1,39 @@
-<p>movie-edit-dialog works!</p>
+<h2 mat-dialog-title>Add movie</h2>
+<mat-dialog-content>
+  @if(isEditMode) {
+    <div class="note">Note: Editing a movie is a feature currently unavailable</div>
+  }
+  <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="form-field">
+      <mat-label>Title</mat-label>
+      <input type="string" matInput formControlName="title" required />
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <mat-label>Publication year</mat-label>
+      <input type="number" matInput formControlName="pub_date" required />
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <mat-label>Duration</mat-label>
+      <input type="number" matInput formControlName="duration" required />
+    <mat-hint>(In minutes)</mat-hint>
+    </mat-form-field>
+    Rating
+    <app-star-rating formControlName="rating"></app-star-rating>
+    <mat-form-field class="form-field">
+      <mat-label>Descritpion</mat-label>
+      <textarea matInput formControlName="description" required></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Categories</mat-label>
+      <mat-select multiple="true"  formControlName="categories">
+        @for (category of categories; track category.name) {
+          <mat-option [value]="category.name">{{category.name}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="action-btns">
+  <button class="secondary" [mat-dialog-close]>Cancel</button>
+  <button class="primary" type="submit" (click)="onSubmit()" [disabled]="!movieForm.valid || isEditMode">Save</button>
+</mat-dialog-actions>

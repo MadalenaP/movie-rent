@@ -38,4 +38,8 @@ export class MoviesService {
   public getCategories(): Observable<ICategory[]> {
     return this.http.get<ICategory[]>(`/api/rent-store/categories`);
   }
+
+  public addMovie(movie: IMovie): Observable<IMovie>{
+    return this.http.post<IMovie>(`/api/rent-store/movies/`, movie);
+  }
 }

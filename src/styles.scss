@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  --mat-menu-container-color: #102540;
+  --mat-menu-container-color: #23233C;
   --mat-paginator-container-text-color: #ffffff;
   --mat-paginator-container-background-color: #0A0F26;
   --mat-paginator-enabled-icon-color: #ffffff;
@@ -8,9 +8,12 @@ body {
   --mat-select-enabled-trigger-text-color: #ffffff;
   --mat-select-enabled-arrow-color: #ffffff;
   --mdc-outlined-text-field-outline-color: #ffffff;   
-  --mdc-dialog-container-color: #102540;
+  --mdc-dialog-container-color: #23233C;
   --mdc-dialog-subhead-color: #ffffff;
   --mdc-dialog-supporting-text-color: #ffffff;
+  --mdc-filled-text-field-disabled-container-color: #4C4C68;
+  --mdc-filled-text-field-disabled-label-text-color: #737389;
+  --mdc-filled-text-field-disabled-input-text-color: #737389;
   background-color: #0A0F26;
   color: #fff;
   margin: 0; 
@@ -51,6 +54,12 @@ button {
     &:hover {
       background-color: #88d7f7;
     }
+
+    &.disabled,
+    &:disabled {
+      background-color: #737389;
+      pointer-events: none;
+    }
   }
 
   &.secondary {
@@ -61,6 +70,13 @@ button {
       border: 1px solid #88d7f7;
       color: #88d7f7;
     }
+
+    &.disabled,
+    &:disabled {
+      border: 1px solid #737389;
+      color: #737389;
+      pointer-events: none;
+    }
   }
 
   &.tetriary {
@@ -68,6 +84,12 @@ button {
 
     &:hover {
       color: #88d7f7;
+    }
+
+    &.disabled,
+    &:disabled {
+      color: #737389;
+      pointer-events: none;
     }
   }
 
@@ -80,7 +102,7 @@ button {
 }
 
 .mdc-text-field--filled {
-  --mdc-filled-text-field-container-color: #102540;
+  --mdc-filled-text-field-container-color: #37374D;
   --mdc-filled-text-field-label-text-color: #ffffff;
   --mdc-filled-text-field-input-text-color: #ffffff;
   --mdc-filled-text-field-hover-label-text-color: #ffffff;
@@ -89,6 +111,20 @@ button {
   --mdc-filled-text-field-focus-active-indicator-color: #ffffff;
   --mdc-filled-text-field-caret-color: #ffffff;
   --mdc-filled-text-field-focus-label-text-color: #ffffff;
+  --mdc-filled-text-field-disabled-container-color: #4C4C68;
+  --mdc-filled-text-field-disabled-label-text-color: #d5d5dc;
+  --mdc-filled-text-field-disabled-input-text-color: #d5d5dc;
+  --mat-select-disabled-trigger-text-color: #d5d5dc;
+}
+
+.mat-mdc-dialog-container {
+  min-width: 400px !important;
+}
+
+.mat-mdc-dialog-actions {
+  display: flex;
+  justify-content: flex-end !important;
+  gap: 20px;
 }
 
 .mat-mdc-menu-item {

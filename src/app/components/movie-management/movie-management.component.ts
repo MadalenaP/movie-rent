@@ -1,21 +1,22 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject, takeUntil, tap } from 'rxjs';
 import { MoviesService } from '../../services/movies.service';
-import { ICategory } from '../../interfaces/ICategory';
 import { IMovie } from '../../interfaces/IMovie';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MovieEditDialogComponent } from '../movie-edit-dialog/movie-edit-dialog.component';
+import { MatSort ,MatSortModule } from '@angular/material/sort';
 
 @Component({
   selector: 'app-movie-management',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule],
+  imports: [MatTableModule, MatPaginatorModule, MatSort, MatSortModule],
   templateUrl: './movie-management.component.html',
   styleUrl: './movie-management.component.scss'
 })
 export class MovieManagementComponent implements OnInit, OnDestroy {
+  @ViewChild(MatSort) sort: MatSort;
   private destroy$: Subject<boolean> = new Subject<boolean>();
   protected movies: IMovie[];
   protected paginatorConfig = {
@@ -47,6 +48,7 @@ export class MovieManagementComponent implements OnInit, OnDestroy {
       tap((result) => {
         this.movies = result.results;
         this.moviesDataSource = new MatTableDataSource<IMovie>(this.movies);
+        this.moviesDataSource.sort = this.sort;
         this.paginatorConfig.listSize = result.count;
         this.isLoading = false;
         console.log('movies', this.movies)
