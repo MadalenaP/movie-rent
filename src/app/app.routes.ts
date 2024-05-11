@@ -7,7 +7,6 @@ import { RentalsComponent } from './components/rentals/rentals.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { AdminGuard } from './services/admin-guard.service';
-import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
 import { MovieManagementComponent } from './components/movie-management/movie-management.component';
 
 export const routes: Routes = [
@@ -32,10 +31,6 @@ export const routes: Routes = [
     path: 'profile',
     component: ProfileComponent,
     canActivate: [AuthGuard]
-  },
-  {
-    path: 'access-denied',
-    component: AccessDeniedComponent
   },
   {
     path: 'statistics',

@@ -24,7 +24,7 @@ export class AdminGuard {
 		if (this.isAdmin) {
 			return true;
 		} else {
-      this.router.navigate(['/access-denied']);
+      this.router.navigate(['/movies']);
 			return false;
 		}
 	}
